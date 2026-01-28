@@ -1,0 +1,27 @@
+node_modules/
+dist/
+*.js.map
+*.d.ts
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Climpse workspace (user data)
+workspace/activity/
+workspace/patterns/
+workspace/memory/
+
+# Screenshots
+*.png
+!docs/*.png

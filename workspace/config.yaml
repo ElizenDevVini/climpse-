@@ -1,0 +1,15 @@
+# Climpse Workspace Configuration
+
+# How often to poll for active window (ms)
+observer_interval: 3000
+
+# Screenshot settings
+screenshot_on_app_switch: true
+screenshot_interval: 30000
+
+# Pattern detection
+pattern_threshold: 3  # minimum repetitions to detect
+pattern_days_window: 7  # days of history to analyze
+
+# Automation
+auto_approve: false  # require manual approval
