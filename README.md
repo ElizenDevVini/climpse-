@@ -19,15 +19,24 @@ Climpse tracks which apps and windows you use, finds sequences you repeat, and o
 
 ## Install
 
+### macOS / Linux
+
 ```bash
-# Clone and install
+git clone https://github.com/ElizenDevVini/climpse-.git
+cd climpse-
+npm install && npm run build
+
+# Or one-liner
+curl -fsSL https://raw.githubusercontent.com/ElizenDevVini/climpse-/main/install.sh | bash
+```
+
+### Windows (PowerShell)
+
+```powershell
 git clone https://github.com/ElizenDevVini/climpse-.git
 cd climpse-
 npm install
 npm run build
-
-# Or use the install script
-curl -fsSL https://raw.githubusercontent.com/ElizenDevVini/climpse-/main/install.sh | bash
 ```
 
 ## Quick Start
@@ -191,7 +200,7 @@ src/
 ## Requirements
 
 - Node.js 20+
-- macOS 12+ or Linux (X11)
+- macOS 12+, Linux (X11), or Windows 10+
 - Screen Recording permission (macOS) for window title access
 
 ## File Structure

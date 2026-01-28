@@ -1,7 +1,9 @@
 node_modules/
 dist/
 *.js.map
-*.d.ts
+
+# Allow source type declarations (src/types/), only ignore generated ones
+dist/**/*.d.ts
 
 # OS
 .DS_Store
