@@ -2,14 +2,17 @@ import { join } from 'path';
 import { existsSync, readdirSync, readFileSync } from 'fs';
 import { SystemNotifier } from './system.js';
 import { ActivityDB } from '../observer/activity.js';
+import type { MessagingHub } from '../messaging/index.js';
 
 export class DailyDigest {
   private workspacePath: string;
   private notifier: SystemNotifier;
+  private messaging: MessagingHub | null;
 
-  constructor(workspacePath: string) {
+  constructor(workspacePath: string, messaging?: MessagingHub | null) {
     this.workspacePath = workspacePath;
     this.notifier = new SystemNotifier();
+    this.messaging = messaging ?? null;
   }
 
   async generate(): Promise<string> {
@@ -55,5 +58,9 @@ export class DailyDigest {
   async sendDigest(): Promise<void> {
     const summary = await this.generate();
     await this.notifier.notifySimple('Climpse Daily Summary', summary);
+
+    if (this.messaging) {
+      await this.messaging.sendDailyDigest(summary);
+    }
   }
 }

@@ -3,6 +3,7 @@ import { mkdirSync, existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 import type { LLMConfig } from './llm.js';
+import type { MessagingConfig } from '../messaging/index.js';
 
 export interface ClimpseConfig {
   llm: LLMConfig;
@@ -13,6 +14,7 @@ export interface ClimpseConfig {
   screenshotInterval: number;
   patternThreshold: number;
   patternDaysWindow: number;
+  messaging?: MessagingConfig;
 }
 
 export function getConfigDir(): string {

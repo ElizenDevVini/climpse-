@@ -7,6 +7,7 @@ import { statusCommand } from './commands/status.js';
 import { setupCommand } from './commands/setup.js';
 import { patternsCommand } from './commands/patterns.js';
 import { logsCommand } from './commands/logs.js';
+import { messageCommand } from './commands/message.js';
 
 const program = new Command();
 
@@ -47,5 +48,11 @@ program
   .description('View activity logs')
   .option('-n, --lines <number>', 'Number of recent entries', '20')
   .action(logsCommand);
+
+program
+  .command('message')
+  .description('Messaging status and testing')
+  .option('--test', 'Send a test message to configured channels')
+  .action(messageCommand);
 
 program.parse();

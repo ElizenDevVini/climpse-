@@ -59,6 +59,8 @@ climpse patterns
 | `climpse patterns --reject <name>` | Reject a pattern |
 | `climpse logs` | View today's activity log |
 | `climpse logs -n 50` | View last 50 activity entries |
+| `climpse message` | Show messaging config status |
+| `climpse message --test` | Send a test message to Telegram/WhatsApp |
 
 ## What It Detects
 
@@ -117,6 +119,38 @@ Climpse uses an LLM to analyze detected sequences and determine if they're autom
 | **OpenAI** | GPT-4o, etc. | |
 | **Ollama** | Any local model | Fully offline, no API key needed |
 
+## Messaging
+
+Climpse can notify you via **Telegram** and **WhatsApp** when it detects patterns. You can approve or reject patterns directly from your phone.
+
+### Telegram Setup
+
+1. Create a bot via [@BotFather](https://t.me/BotFather) on Telegram
+2. Get the bot token
+3. Start a chat with your bot and get your chat ID
+4. Run `climpse setup` and select Telegram
+
+When a pattern is detected, you get a message with inline buttons:
+> **Climpse: Pattern Detected**
+>
+> I noticed you open Twitter, Gmail, Stripe Dashboard in sequence.
+>
+> **[Yes, automate it]** **[Not now]** **[Never]**
+
+### WhatsApp Setup
+
+1. Create a [Meta Business account](https://business.facebook.com)
+2. Set up the [WhatsApp Business API](https://developers.facebook.com)
+3. Get your access token and phone number ID
+4. Run `climpse setup` and select WhatsApp
+
+### Test Messaging
+
+```bash
+climpse message         # Show configured channels
+climpse message --test  # Send a test message
+```
+
 ## Architecture
 
 ```
@@ -127,6 +161,7 @@ src/
 ├── observer/             # Activity tracking (active-win, screenshots, OCR)
 ├── patterns/             # Pattern detection & LLM analysis
 ├── automation/           # Workflow execution (browser, OS)
+├── messaging/            # Telegram & WhatsApp integration
 ├── daemon/               # Background service (launchd, systemd)
 └── notify/               # System notifications & daily digest
 ```
@@ -141,6 +176,8 @@ src/
 - `execa` — shell/OS automation
 - `node-notifier` — system notifications
 - `@anthropic-ai/sdk` / `openai` — LLM integration
+- `node-telegram-bot-api` — Telegram bot messaging
+- WhatsApp Business Cloud API — WhatsApp messaging (no extra deps)
 
 ## How It's Different
 

@@ -1,6 +1,7 @@
 import * as p from '@clack/prompts';
 import { checkPermissions } from './permissions.js';
 import { configureLLM } from './llm.js';
+import { configureMessaging } from './messaging.js';
 import { setupWorkspace, saveConfig, getConfigDir, type ClimpseConfig } from './workspace.js';
 import { DaemonManager } from '../daemon/index.js';
 import { mkdirSync, existsSync } from 'fs';
@@ -37,6 +38,9 @@ export async function runWizard(): Promise<void> {
   // Setup workspace
   const workspace = await setupWorkspace();
 
+  // Configure messaging channels (optional)
+  const messagingConfig = await configureMessaging();
+
   // Install as service?
   const installService = await p.confirm({
     message: 'Install as background service? (recommended)',
@@ -63,6 +67,7 @@ export async function runWizard(): Promise<void> {
     screenshotInterval: 30000,
     patternThreshold: 3,
     patternDaysWindow: 7,
+    messaging: messagingConfig,
   };
 
   saveConfig(config);
