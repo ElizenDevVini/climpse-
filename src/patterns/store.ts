@@ -24,8 +24,6 @@ export class PatternStore {
 
   save(analysis: PatternAnalysis, sequence: DetectedSequence): void {
     const filePath = join(this.patternsDir, `${analysis.name}.md`);
-    const now = new Date().toISOString();
-
     const markdown = this.toMarkdown(analysis, sequence);
     writeFileSync(filePath, markdown, 'utf-8');
   }

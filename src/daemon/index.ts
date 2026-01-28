@@ -39,10 +39,6 @@ export class DaemonManager {
       throw new Error('Daemon is already running');
     }
 
-    // Find the climpse executable
-    const climpseMain = join(import.meta.url.replace('file://', ''), '..', '..', 'daemon', 'run.js');
-
-    // Determine the actual path to run.js
     const scriptPath = new URL('../daemon/run.js', import.meta.url).pathname;
 
     const child = execa('node', [scriptPath], {
