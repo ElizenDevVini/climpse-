@@ -1,5 +1,8 @@
 import { join } from 'path';
-import { existsSync, mkdirSync, readdirSync, unlinkSync, statSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync, readdirSync, unlinkSync, statSync } from 'fs';
+
+// screenshot-desktop has no type declarations — declare inline
+type ScreenshotFn = (options?: { filename?: string; format?: string }) => Promise<Buffer>;
 
 export class ScreenCapture {
   private screenshotDir: string;
@@ -16,12 +19,17 @@ export class ScreenCapture {
 
   async capture(): Promise<string | null> {
     try {
-      const screenshotDesktop = await import('screenshot-desktop');
+      const mod = await (import('screenshot-desktop' as string) as Promise<{ default: ScreenshotFn }>);
+      const screenshotDesktop = mod.default;
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
       const filename = `screenshot-${timestamp}.png`;
       const filepath = join(this.screenshotDir, filename);
 
-      await screenshotDesktop.default({ filename: filepath });
+      const buffer = await screenshotDesktop({ filename: filepath });
+      if (!existsSync(filepath)) {
+        // Some versions return the buffer instead of writing to disk
+        writeFileSync(filepath, buffer);
+      }
       return filepath;
     } catch (err) {
       // Screenshot may fail if no display, permissions, etc.
