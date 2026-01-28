@@ -1,0 +1,49 @@
+{
+  "name": "climpse",
+  "version": "0.1.0",
+  "description": "AI that watches you work, learns your patterns, and automates them.",
+  "main": "dist/index.js",
+  "bin": {
+    "climpse": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "automation",
+    "ai",
+    "workflow",
+    "pattern-detection",
+    "productivity"
+  ],
+  "author": "Elizen",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@clack/prompts": "^0.9.1",
+    "@types/node-telegram-bot-api": "^0.64.13",
+    "active-win": "^9.0.0",
+    "better-sqlite3": "^11.7.0",
+    "commander": "^13.1.0",
+    "execa": "^9.5.2",
+    "node-notifier": "^10.0.1",
+    "node-telegram-bot-api": "^0.67.0",
+    "openai": "^4.82.0",
+    "screenshot-desktop": "^1.15.0",
+    "tesseract.js": "^5.1.1",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.12.0",
+    "@types/node-notifier": "^8.0.5",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "type": "module"
+}
